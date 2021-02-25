@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import application.MapController?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowController">
+   <left>
+      <BorderPane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <top>
+            <ButtonBar prefWidth="245.0" BorderPane.alignment="CENTER">
+              <buttons>
+                <Button mnemonicParsing="false" onAction="#connect" text="Connect" />
+                  <Button mnemonicParsing="false" onAction="#loadData" text="Load Data" />
+                  <Button mnemonicParsing="false" onAction="#calculatePathButton" text="Calculate Path" textAlignment="CENTER" />
+              </buttons>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" right="20.0" top="30.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+            </ButtonBar>
+         </top>
+         <center>
+            <MapController fx:id="mc" height="320.0" width="400.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </left>
+   <center>
+      <BorderPane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <top>
+            <Pane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+               <children>
+                  <RadioButton fx:id="rbAutopilot" layoutX="128.0" mnemonicParsing="false" onAction="#autopilot" prefHeight="40.0" prefWidth="114.0" text="Autopilot" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup />
+                     </toggleGroup>
+                  </RadioButton>
+                  <Button layoutX="287.0" layoutY="8.0" mnemonicParsing="false" onAction="#loadScript" text="Load Script" />
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <TextArea fx:id="scriptArea" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+               </BorderPane.margin>
+            </TextArea>
+         </center>
+      </BorderPane>
+   </center>
+   <right>
+      <BorderPane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <top>
+            <RadioButton fx:id="rbManual" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Manual" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </BorderPane.margin>
+            </RadioButton>
+         </top>
+         <bottom>
+            <Pane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" left="80.0" right="110.0" />
+               </BorderPane.margin>
+               <children>
+                  <Slider fx:id="rudderSlider" blockIncrement="0.1" layoutX="1.0" layoutY="20.0" majorTickUnit="0.5" max="1.0" min="-1.0" prefHeight="37.0" prefWidth="209.0" showTickLabels="true" showTickMarks="true" />
+                  <Label layoutX="75.0" layoutY="50.0" prefHeight="21.0" prefWidth="80.0" text="rudder" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </bottom>
+         <left>
+            <Pane prefHeight="182.0" prefWidth="58.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" top="40.0" />
+               </BorderPane.margin>
+               <children>
+                  <Slider fx:id="throttleSlider" blockIncrement="0.1" layoutX="7.0" majorTickUnit="0.25" max="1.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="34.0" showTickLabels="true" showTickMarks="true" translateX="20.0" value="0.5">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Slider>
+                  <Label layoutX="-28.0" layoutY="76.0" prefHeight="30.0" prefWidth="85.0" rotate="-90.0" text="throttle" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </left>
+         <right>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="27.0" layoutY="129.0" rotate="90.0" scaleX="2.0" scaleY="2.0" text="⬅ elevator ➡" textAlignment="CENTER" translateX="-30.0" translateY="5.0" />
+               </children>
+            </Pane>
+         </right>
+         <center>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <Circle fx:id="areaCircle" fill="#c7cacd" layoutX="137.0" layoutY="130.0" radius="100.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" />
+                  <Circle fx:id="joystickCircle" fill="#24282c" layoutX="137.0" layoutY="130.0" onMouseDragged="#joystickDrag" onMouseReleased="#joystickDragRelease" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label contentDisplay="TOP" layoutX="83.0" layoutY="-1.0" prefHeight="30.0" prefWidth="124.0" text="⬅ aileron ➡" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </Pane>
+         </center>
+      </BorderPane>
+   </right>
+</BorderPane>
